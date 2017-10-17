@@ -1,0 +1,96 @@
+コマンド類
+
+STEP1
+        １、ローカルリポジトリの作成(cdで作成したファイルのところに入る)
+            git init　：　必要なファイルを追加
+
+        ２、add(インデックスにファイルを追加)
+            git add [ファイル名]
+                git addの使用例
+                git add . //すべてのファイル・ディレクトリ
+                git add *.css //すべてのCSSファイル
+                git add -n //追加されるファイルを調べる
+                git add -u //変更されたファイルを追加する
+                git rm --cached //addしてしまったファイルを除外
+
+        ３、コミット(コメントを追加)
+            git commit -m "initial commit"　:　何をしたかコメントを追加
+                git commit -a //変更のあったファイルすべて
+                git commit --amend //直前のコミットを取り消す
+                git commit -v //変更点を表示してコミット
+
+                ※コミットの取り消し
+                　git reset --soft HEAD~2 // 最新のコミットから2件分をワークディレクトリの内容を保持し取り消す
+                　git reset --hard HEAD~2 // 最新のコミットから2件分のワークディレクトリの内容とコミットを取り消す
+
+STEP2
+        １、リモートリポジトリの追加
+            git remote add [リモート名] [リモートのURL]
+                git remoteの使用例
+                git remote add origin https://github.com/Rclaster/tutorial.git
+
+        ２、プッシュ(リモートにファイルをアップロード)
+            git push [git remote addの時のリモート名] master
+                git pushの使用例
+                git push origin master
+
+STEP3
+        １、プル(アップロードファイルを落としたい側がファイルをダウンロード)
+            git pull origin master
+
+
+その他コマンド
+        差分を確認する
+            git diff
+
+        ログの表示
+            コミットのログが見れる
+            git log
+            色々見れる
+            git reflog
+            pushのログが見れる
+            git reflog origin/branch_name
+            Qiitaおすすめコマンド
+            git log --graph --name-status --pretty=format:"%C(red)%h %C(green)%an %Creset%s %C(yellow)%d%Creset"
+            
+        ブランチ関係
+            ブランチの作成
+            git branch [ブランチ名]
+            ブランチの移動
+            git branch [作成したブランチ名]
+            ブランチの削除
+            git branch -d [作成したブランチ名]
+            現在のブランチ名の変更
+            git branch -m [branch_name]
+            ローカルブランチの一覧
+            git branch
+
+        master以外のブランチで変更した箇所をmasterに反映させる
+            ブランチに移動
+            git chekout [ブランチ名]
+            変更ファイルをコミット
+            git commit -a -m "コメント"
+            masterに移動
+            git checkout master
+            差分をマージ
+            git merge [branch_name]
+            ファイルの更新
+            git push origin master
+
+
+
+
+
+リモートリポジトリからプロジェクトをコピー
+cd [ローカルリポジトリのパス]
+git clone [リモートリポジトリパス] (例： https://github.com/jquery/jquery.git)
+
+
+/-------------------------------------------------------------------------------/
+ファイル更新までの基本手順
+ファイルを追加
+ファイルをコミット
+ファイルを更新
+git add [ファイル名] //追加
+git commit -a -m "任意のコメント"  //コミット (-aオプションは変更を自動検出してくれる)
+git push origin master  //masterを更新
